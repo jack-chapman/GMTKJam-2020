@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://aseprite/black.png" type="Texture" id=1]
 [ext_resource path="res://Level2.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://aseprite/JumpArrow.png" type="Texture" id=7]
 [ext_resource path="res://aseprite/Restart.png" type="Texture" id=8]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://KillFloor.tscn" type="PackedScene" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 6 )
@@ -86,34 +87,26 @@ current = true
 smoothing_enabled = true
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 95.625, 23.125 )
+position = Vector2( 108, 73.875 )
 texture = ExtResource( 5 )
 texture_scale = 3.0
 color = Color( 0, 1, 1, 1 )
 shadow_enabled = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Light2D2" type="Light2D" parent="."]
-position = Vector2( 8.5, 47.5 )
+position = Vector2( 52.125, 38.25 )
 texture = ExtResource( 5 )
 texture_scale = 3.0
 color = Color( 0, 1, 1, 1 )
 shadow_enabled = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Light2D3" type="Light2D" parent="."]
-position = Vector2( 177.375, -6.125 )
+position = Vector2( 215.25, 54.125 )
 texture = ExtResource( 5 )
 texture_scale = 3.0
 color = Color( 0, 1, 0, 1 )
+energy = 1.5
 shadow_enabled = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -139,8 +132,11 @@ position = Vector2( 40.375, 33.25 )
 
 [node name="Finish" parent="." instance=ExtResource( 3 )]
 position = Vector2( 328, 54.875 )
+
+[node name="Kill" parent="." instance=ExtResource( 10 )]
 [connection signal="fix" from="Player" to="." method="_on_Player_fix"]
 [connection signal="lose_jump_control" from="Player" to="." method="_on_Player_lose_jump_control"]
 [connection signal="lose_left_control" from="Player" to="." method="_on_Player_lose_left_control"]
 [connection signal="lose_right_control" from="Player" to="." method="_on_Player_lose_right_control"]
 [connection signal="body_entered" from="Finish" to="." method="_on_Finish_body_entered"]
+[connection signal="body_entered" from="Kill" to="." method="_on_Kill_body_entered"]
