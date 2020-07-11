@@ -30,8 +30,8 @@ func _on_Player_fix():
 
 
 func _on_Finish_body_entered(_body):
-	var level_six = load("res://Level6.tscn")
-	get_tree().change_scene_to(level_six)
+	var end = load("res://EndScreen.tscn")
+	get_tree().change_scene_to(end)
 
 
 func _on_Kill_body_entered(_body):
@@ -51,5 +51,7 @@ func reset_level():
 
 	# reinstate heal(s)
 	$Heal.reset()
+	$Heal2.reset()
+	$Heal3.reset()
 
 	player.is_resetting = false

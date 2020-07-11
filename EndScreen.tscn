@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://aseprite/Title.png" type="Texture" id=1]
+[ext_resource path="res://aseprite/Thanks.png" type="Texture" id=2]
+[ext_resource path="res://MainMenu.gd" type="Script" id=3]
+
+[node name="Menu" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="GridContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -47.0
+margin_right = 50.0
+margin_bottom = 47.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Container"]
+margin_right = 100.0
+margin_bottom = 50.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Container"]
+margin_top = 54.0
+margin_right = 100.0
+margin_bottom = 94.0
+
+[node name="TextureRect2" type="TextureRect" parent="Container/CenterContainer"]
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
