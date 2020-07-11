@@ -30,18 +30,22 @@ func _on_Player_fix():
 
 
 func _on_Finish_body_entered(_body):
-	# load level 3
-	print('finished l2')
+	var level_three = load("res://Level3.tscn")
+	get_tree().change_scene_to(level_three)
 
 
-func _on_Kill_body_entered(body):
-	body.fix()
-	body.velocity = Vector2.ZERO
-	body.global_position = player_spawn.global_position
+func _on_Kill_body_entered(_body):
+	reset_level()
 
 func _input(event):
 	if (event.is_action_pressed('reset')):
-		var player = $Player
-		player.fix()
-		player.velocity = Vector2.ZERO
-		player.global_position = player_spawn.global_position
+		reset_level()
+
+func reset_level():
+	var player = $Player
+	player.is_resetting = true
+	player.fix()
+	player.velocity = Vector2.ZERO
+	player.global_position = player_spawn.global_position
+
+	player.is_resetting = false

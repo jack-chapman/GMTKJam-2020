@@ -8,6 +8,8 @@ export var  gravity = 200
 
 var velocity = Vector2()
 
+var is_resetting = false
+
 var can_control_jump = true
 var can_control_left = true
 var can_control_right = true

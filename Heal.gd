@@ -1,21 +1,16 @@
 extends Area2D
 
+var ignore = false
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func reset():
+	$Sprite.visible = true
+	ignore = false
 
 func _on_Heal_body_entered(body):
-	body.fix()
-	queue_free()
+	if ignore:
+		pass
+	else:
+		print('hit')
+		body.fix()
+		$Sprite.visible = false
+		ignore = true
