@@ -25,3 +25,7 @@ func _on_Player_fix():
 	left_arrow.frame = 0
 	jump_arrow.stop()
 	jump_arrow.frame = 0
+
+
+func _on_Finish_body_entered(_body):
+	print('You did it!')
