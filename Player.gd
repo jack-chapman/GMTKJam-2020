@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+onready var animation_player = $AnimationPlayer
+
 export var WALK_FORCE = 600
 export var  WALK_MAX_SPEED = 60
 export var  STOP_FORCE = 1300
@@ -41,6 +43,10 @@ func _physics_process(delta):
 
 func do_jump():
 	velocity.y = -JUMP_SPEED
+	if (velocity.x > 0):
+		spin_right()
+	elif (velocity.x < 0):
+		spin_left()
 
 func get_walk_vector():
 	var left = 0
@@ -66,3 +72,9 @@ func fix():
 	can_control_left = true
 	can_control_right = true
 	emit_signal("fix")
+
+func spin_right():
+	animation_player.play('spin_right')
+
+func spin_left():
+	animation_player.play('spin_left')

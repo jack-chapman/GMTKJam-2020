@@ -30,8 +30,8 @@ func _on_Player_fix():
 
 
 func _on_Finish_body_entered(_body):
-	var level_four = load("res://Level4.tscn")
-	get_tree().change_scene_to(level_four)
+	# load level 4
+	print('finished l3')
 
 
 func _on_Kill_body_entered(_body):

@@ -10,7 +10,6 @@ func _on_Heal_body_entered(body):
 	if ignore:
 		pass
 	else:
-		print('hit')
 		body.fix()
 		$Sprite.visible = false
 		ignore = true
