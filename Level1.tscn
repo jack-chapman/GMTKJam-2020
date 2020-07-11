@@ -1,0 +1,150 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://aseprite/black.png" type="Texture" id=1]
+[ext_resource path="res://Level1.gd" type="Script" id=2]
+[ext_resource path="res://Finish.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://aseprite/light.png" type="Texture" id=5]
+[ext_resource path="res://aseprite/LeftArrow.png" type="Texture" id=6]
+[ext_resource path="res://aseprite/JumpArrow.png" type="Texture" id=7]
+[ext_resource path="res://aseprite/Restart.png" type="Texture" id=8]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Heal.tscn" type="PackedScene" id=10]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 6 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 6 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": false,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 7 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "default",
+"speed": 20.0
+} ]
+
+[node name="Game" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 45.875, 37.875 )
+scale = Vector2( 10, 20 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Platform" parent="." instance=ExtResource( 4 )]
+position = Vector2( 63.055, 66.101 )
+
+[node name="Platform2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 139.055, 83.851 )
+
+[node name="Platform3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 215.305, 102.101 )
+
+[node name="Heal" parent="." instance=ExtResource( 10 )]
+position = Vector2( 137.875, 73.375 )
+
+[node name="Player" parent="." instance=ExtResource( 9 )]
+position = Vector2( 40.68, 51.976 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+smoothing_enabled = true
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 95.625, 23.125 )
+texture = ExtResource( 5 )
+texture_scale = 3.0
+color = Color( 0, 1, 1, 1 )
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light2D2" type="Light2D" parent="."]
+position = Vector2( 8.5, 47.5 )
+texture = ExtResource( 5 )
+texture_scale = 3.0
+color = Color( 0, 1, 1, 1 )
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light2D3" type="Light2D" parent="."]
+position = Vector2( 177.375, -6.125 )
+texture = ExtResource( 5 )
+texture_scale = 3.0
+color = Color( 0, 1, 0, 1 )
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LeftArrow" type="AnimatedSprite" parent="CanvasLayer"]
+position = Vector2( 80, 10 )
+frames = SubResource( 5 )
+
+[node name="JumpArrow" type="AnimatedSprite" parent="CanvasLayer"]
+position = Vector2( 130, 10 )
+frames = SubResource( 10 )
+
+[node name="RightArrow" type="AnimatedSprite" parent="CanvasLayer"]
+position = Vector2( 180, 10 )
+frames = SubResource( 5 )
+flip_h = true
+
+[node name="Restart" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 240, 10 )
+texture = ExtResource( 8 )
+
+[node name="PlayerSpawn" type="Position2D" parent="."]
+position = Vector2( 40.375, 33.25 )
+
+[node name="Finish" parent="." instance=ExtResource( 3 )]
+position = Vector2( 232.25, 89.875 )
+[connection signal="fix" from="Player" to="." method="_on_Player_fix"]
+[connection signal="lose_jump_control" from="Player" to="." method="_on_Player_lose_jump_control"]
+[connection signal="lose_left_control" from="Player" to="." method="_on_Player_lose_left_control"]
+[connection signal="lose_right_control" from="Player" to="." method="_on_Player_lose_right_control"]
+[connection signal="body_entered" from="Finish" to="." method="_on_Finish_body_entered"]

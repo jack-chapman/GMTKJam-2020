@@ -28,4 +28,5 @@ func _on_Player_fix():
 
 
 func _on_Finish_body_entered(_body):
-	print('You did it!')
+	var level_two = load("res://Level2.tscn")
+	get_tree().change_scene_to(level_two)
