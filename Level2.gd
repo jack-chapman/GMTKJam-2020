@@ -41,6 +41,8 @@ func _on_Kill_body_entered(_body):
 func _input(event):
 	if (event.is_action_pressed('reset')):
 		reset_level()
+	if event.is_action_pressed("mute"):
+		Sounds.toggle_mute()
 
 func reset_level():
 	var player = $Player
