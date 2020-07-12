@@ -35,6 +35,7 @@ func _on_Finish_body_entered(_body):
 
 
 func _on_Kill_body_entered(_body):
+	Sounds.play_die()
 	reset_level()
 
 func _input(event):

@@ -39,10 +39,12 @@ func _physics_process(delta):
 		elif Input.is_action_just_pressed("jump"):
 			can_control_jump = false
 			emit_signal("lose_jump_control")
+			Sounds.play_break()
 			do_jump()
 
 func do_jump():
 	velocity.y = -JUMP_SPEED
+	Sounds.play_jump()
 	if (velocity.x > 0):
 		spin_right()
 	elif (velocity.x < 0):
@@ -56,6 +58,7 @@ func get_walk_vector():
 		if (right != 0):
 			can_control_right = false
 			emit_signal("lose_right_control")
+			Sounds.play_break()
 	else:
 		right = 1
 	if can_control_left:
@@ -63,6 +66,7 @@ func get_walk_vector():
 		if (left != 0):
 			can_control_left = false
 			emit_signal("lose_left_control")
+			Sounds.play_break()
 	else:
 		left = 1
 	return WALK_FORCE * (right - left)
@@ -72,6 +76,8 @@ func fix():
 	can_control_left = true
 	can_control_right = true
 	emit_signal("fix")
+	if (!is_resetting):
+		Sounds.play_heal()
 
 func spin_right():
 	animation_player.play('spin_right')
